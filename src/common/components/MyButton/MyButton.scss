@@ -1,0 +1,46 @@
+@import '../../../common/styles/variables.scss';
+
+.RoundButton {
+    display: flex-end;
+    outline: none;
+    margin: $metric-med;
+    border: 0;
+    height: $metric-med*1.5;
+    width: $metric-med*1.5;
+    border-radius: 50%;
+    background-color: $color-blue; 
+    cursor: pointer;   
+    -webkit-box-shadow: 26px 33px 131px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 26px 33px 131px -5px rgba(0,0,0,0.75);
+    box-shadow: 26px 33px 131px -5px rgba(0,0,0,0.75);
+
+    .Icon {
+        height: $metric-large / 2;
+    }
+
+    &:hover {
+        opacity:0.8;
+        background-color: $color-darkblue;
+    }
+
+    &.Clicked {
+        opacity:0.8;
+        background-color: $color-darkblue;
+    }
+
+    .Popup {
+        position: fixed; top:380px; right: 140px;
+        width: 250px;
+        height: 250px;
+        padding: 45px;
+        color: $color-white;
+        background-color: $color-blue;
+        border-radius: 200px 200px 0px 200px;
+        -moz-border-radius: 200px 200px 0px 200px;
+        -webkit-border-radius: 200px 200px 0px 200px;
+        border: 0px none ;
+        -webkit-box-shadow: -16px -19px 167px -28px rgba(0,0,0,0.75);
+        -moz-box-shadow: -16px -19px 167px -28px rgba(0,0,0,0.75);
+        box-shadow: -16px -19px 167px -28px rgba(0,0,0,0.75);
+    }
+}

@@ -1,0 +1,13 @@
+@import '../../../common/styles/variables.scss';
+
+.Sidebar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: $metric-x-large;
+    height: 100vh;
+    background-color: $color-blue; 
+    -webkit-box-shadow: 3px 1px 56px -11px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 1px 56px -11px rgba(0,0,0,0.75);
+    box-shadow: 3px 1px 56px -11px rgba(0,0,0,0.75);
+}

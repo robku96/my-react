@@ -1,0 +1,13 @@
+/*
+  variables.scss - defines all globally used variables
+*/
+.Sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80px;
+  height: 100vh;
+  background-color: #189ad3;
+  -webkit-box-shadow: 3px 1px 56px -11px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 1px 56px -11px rgba(0, 0, 0, 0.75);
+  box-shadow: 3px 1px 56px -11px rgba(0, 0, 0, 0.75); }
