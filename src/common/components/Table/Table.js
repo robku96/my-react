@@ -22,36 +22,18 @@ class Table extends Component {
                         return <div key={index} className="Cell">{title}</div>;
                     }) } 
                 </div>
-                <div className="Row">
-                    <div className="Cell">some example some example some example</div>
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                </div>
-                <div className="Row">
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                </div>
-                <div className="Row">
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                    <div className="Cell">some example</div>
-                </div>
+                {   
+                    this.props.data.map((book,index) => {
+                        return <div key={index} className="Row">
+                            <div className="Cell"> {book.title} </div>
+                            <div className="Cell"> {book.authorId} </div>
+                            <div className="Cell"> {book.publication_year} </div>
+                            <div className="Cell"> {book.publishing_house} </div>
+                            <div className="Cell"> {book.pages} </div>
+                            <div className="Cell"> {book.price} </div>
+                            
+                        </div>
+                    }) }
             </div>
         )
     }

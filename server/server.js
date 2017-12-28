@@ -5,6 +5,11 @@ var app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 var bookId = 4;
 var books = [
@@ -21,7 +26,7 @@ var books = [
         id: 2,
         title: "Tajniki języka Javascript. Asynchronicznośc i wydajność",
         authorId: 3,
-        publication_date: "2016",
+        publication_year: "2016",
         publishing_house: "Helion",
         pages: "96",
         price: "29,99",
@@ -29,8 +34,8 @@ var books = [
     {
         id: 3,
         title: "Android. Programowanie aplikacji",
-        authorId: "Dawn Griffiths David Griffiths",
-        publication_date: "2016",
+        authorId: [4,5],
+        publication_year: "2016",
         publishing_house: "Helion",
         pages: "712",
         price: "99,00",

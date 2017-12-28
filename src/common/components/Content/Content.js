@@ -1,28 +1,35 @@
 import React, { Component } from 'react';
 import Footer from '../Footer/Footer.js';
 import Table from '../Table/Table.js';
+import { observer, inject } from "mobx-react";
 import './Content.css';
 
-class Content extends Component {
-  headers = [
-    'Tytuł',
-    'Autor',
-    'Rok wydania',
-    'Wydawnictwo',
-    'Ilość stron',
-    'Cena',
-    'Edytuj',
-    'Usuń'
-  ]
+const Content = inject("bookStore")(observer(
+  class Content extends Component {
+    headers = [
+      'Tytuł',
+      'Autor',
+      'Rok wydania',
+      'Wydawnictwo',
+      'Ilość stron',
+      'Cena',
+      'Edytuj',
+      'Usuń'
+    ]
 
-  render() {
-    return (
-      <div className="Content">
-          <Table headers={this.headers}/>
+    componentWillMount(){
+      this.props.bookStore.fetchBookList();
+    }
+
+    render() {
+      return (
+        <div className="Content">
+          <Table headers={this.headers} data={this.props.bookStore.books}/>
           <Footer />
-      </div>
-    );
+        </div>
+      );
+    }
   }
-}
+))
 
 export default Content;
