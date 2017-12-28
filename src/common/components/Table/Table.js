@@ -21,19 +21,16 @@ class Table extends Component {
                     this.props.headers.map((title, index) => {
                         return <div key={index} className="Cell">{title}</div>;
                     }) } 
-                </div>
-                {   
-                    this.props.data.map((book,index) => {
-                        return <div key={index} className="Row">
-                            <div className="Cell"> {book.title} </div>
-                            <div className="Cell"> {book.authorId} </div>
-                            <div className="Cell"> {book.publication_year} </div>
-                            <div className="Cell"> {book.publishing_house} </div>
-                            <div className="Cell"> {book.pages} </div>
-                            <div className="Cell"> {book.price} </div>
-                            
+                </div> {   
+                    this.props.data.map((content,index) => {
+                        return <div key={index} className="Row">{
+                            Object.values(content).map((p) => {
+                                return <div className="Cell">{p}</div>
+                            })   
+                        }    
                         </div>
-                    }) }
+                    }) 
+                }
             </div>
         )
     }

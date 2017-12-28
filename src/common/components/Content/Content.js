@@ -7,6 +7,7 @@ import './Content.css';
 const Content = inject("bookStore")(observer(
   class Content extends Component {
     headers = [
+      'Id',
       'Tytuł',
       'Autor',
       'Rok wydania',
