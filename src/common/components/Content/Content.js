@@ -25,7 +25,7 @@ const Content = inject("bookStore")(observer(
     render() {
       return (
         <div className="Content">
-          <Table headers={this.headers} data={this.props.bookStore.books}/>
+          <Table headers={this.headers} data={this.props.bookStore.books} />
           <Footer />
         </div>
       );

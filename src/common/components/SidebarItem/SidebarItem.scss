@@ -10,12 +10,10 @@
     }
 
     &:hover {
-        opacity:0.5;
         background-color: $color-darkblue;
     }
 
     &.selected {
-        opacity:0.5;
         background-color: $color-darkblue 
     }
 }

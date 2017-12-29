@@ -6,17 +6,20 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 
-var bookId = 4;
+var bookId = 9;
+var authorId = 6;
+
 var books = [
     {
         id: 1,
         title: "Wprowadzenie do HTML5",
-        authorId: [1, 2],
+        authorId: [1,2,3,4,1],
         publication_year: "2011",
         publishing_house: "Helion",
         pages: "240",
@@ -25,7 +28,7 @@ var books = [
     {
         id: 2,
         title: "Tajniki języka Javascript. Asynchronicznośc i wydajność",
-        authorId: 3,
+        authorId: [1,2,3],
         publication_year: "2016",
         publishing_house: "Helion",
         pages: "96",
@@ -34,7 +37,7 @@ var books = [
     {
         id: 3,
         title: "Android. Programowanie aplikacji",
-        authorId: [4,5],
+        authorId: [4,5,1],
         publication_year: "2016",
         publishing_house: "Helion",
         pages: "712",
@@ -43,12 +46,39 @@ var books = [
     {
         id: 4,
         title: "Wprowadzenie do HTML5 2",
-        authorId: 1,
+        authorId: [2,1],
         publication_year: "2014",
         publishing_house: "Helion",
         pages: "220",
         price: "39,99",
     },
+    {
+        id: 5,
+        title: "Wprowadzenie do HTML5 2",
+        authorId: [2,1],
+        publication_year: "2014",
+        publishing_house: "Helion",
+        pages: "220",
+        price: "39,99",
+    },
+    {
+        id: 6,
+        title: "Wprowadzenie do HTML5 2",
+        authorId: [2,1],
+        publication_year: "2014",
+        publishing_house: "Helion",
+        pages: "220",
+        price: "39,99",
+    },
+    {
+        id: 7,
+        title: "Wprowadzenie do HTML5 2",
+        authorId: [2,1],
+        publication_year: "2014",
+        publishing_house: "Helion",
+        pages: "220",
+        price: "39,99",
+    }
 ];
 
 var authors = [

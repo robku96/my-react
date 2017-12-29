@@ -21,12 +21,12 @@ class MyButton extends Component {
         return (
             <div>
                 {isClicked ? (
-                    <button className="RoundButton Clicked" onClick={this.handleClick}> 
-                        <img className="Icon" src={this.props.source} alt="icon"></img>
-                        <div className="Popup"><h2>INFO ABOUT APPLICATION</h2></div>
+                    <button className={`${this.props.buttonClass} ${this.props.buttonClassClicked}`} > 
+                        <img className={this.props.iconClass} src={this.props.source} alt="icon"></img>
+                        <div className={this.props.popupClass}><h2>INFO ABOUT APPLICATION</h2></div>
                     </button>) 
-                    : ( <button className="RoundButton" onClick={this.handleClick}>
-                        <img className="Icon" src={this.props.source} alt="icon"></img>
+                    : ( <button className={this.props.buttonClass}>  
+                        <img className={this.props.iconClass} src={this.props.source} alt="icon"></img>
                     </button>)}
             </div>
         )

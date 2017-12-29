@@ -32,21 +32,59 @@
 
     .Row{
         display: flex;
-        height:50px;
         border-bottom: 1px solid gray;
 
         .Cell{
             display: flex;
+            flex-direction: column;
             width: 100%;
             padding: $metric-x-small;
             text-align: center;
             justify-content: center;
+
+            .item{
+                padding: 2px;
+            }
+
+            .RoundButton {
+                display: flex-end;
+                outline: none;;
+                border: 0;
+                height: $metric-small*2.3;
+                width: $metric-small*2.3;
+                border-radius: 30%;
+                background-color:white;
+                cursor: pointer;   
+                
+            
+                .Icon {
+                    height: $metric-x-small*3;
+                }
+            
+                
             
             
+            
+                .Popup {
+                    position: fixed; top:380px; right: 140px;
+                    width: 250px;
+                    height: 250px;
+                    padding: 45px;
+                    color: $color-white;
+                    background-color: $color-blue;
+                    border-radius: 200px 200px 0px 200px;
+                    -moz-border-radius: 200px 200px 0px 200px;
+                    -webkit-border-radius: 200px 200px 0px 200px;
+                    border: 0px none ;
+                    -webkit-box-shadow: -16px -19px 167px -28px rgba(0,0,0,0.75);
+                    -moz-box-shadow: -16px -19px 167px -28px rgba(0,0,0,0.75);
+                    box-shadow: -16px -19px 167px -28px rgba(0,0,0,0.75);
+                }
+            }   
         }
 
         &:hover{
-            opacity: 0.6;
+            
             background-color: #172B4D;
             color: white;
             border-bottom: 1px solid gray;
@@ -54,3 +92,4 @@
     }
 
 }
+
