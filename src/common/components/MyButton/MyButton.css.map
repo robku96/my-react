@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "ACAA;;EAEE;AACF,OAAO,CAAC,iFAAI",
+    "sources": [
+        "MyButton.scss",
+        "../../styles/variables.scss"
+    ],
+    "names": [],
+    "file": "MyButton.css"
+}

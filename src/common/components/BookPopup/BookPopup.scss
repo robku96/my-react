@@ -1,0 +1,69 @@
+@import '../../../common/styles/variables.scss';
+
+.Popup {
+    position: fixed; 
+    display: flex;
+    flex-direction: column;
+    text-align:left;
+    top: 100px; 
+    left: 550px; 
+    width: 600px;
+    height: 550px;
+    padding: 45px;
+    color: $color-white;
+    background-color: $color-blue;
+    border: 0px none ;
+    -webkit-box-shadow: -3px 2px 93px 3px rgba(0,0,0,0.75);
+    -moz-box-shadow: -3px 2px 93px 3px rgba(0,0,0,0.75);
+    box-shadow: -3px 2px 93px 3px rgba(0,0,0,0.75);
+
+    .Label {
+        padding-top: $metric-x-small;
+        padding-bottom: $metric-x-small /2;
+        font-size: 24px;
+        font-family: $font-header;
+    }
+
+    .Input {
+        padding: $metric-x-small /4;
+        font-size: 18px;
+        border: 0;
+        border-radius: 4px;
+    }
+
+    .buttonsForm {
+        display: flex;
+        padding-top: $metric-base;
+        justify-content: flex-end;
+
+        .Add {
+            border: 0;
+            width: 200px;
+            height: 40px;
+            color: white;
+            margin-left: $metric-x-small;
+            font-size: $metric-small;
+            background-color: $color-darkblue;
+
+            &:hover {
+                opacity: 0.8;
+                cursor: pointer;
+            }
+        }
+
+        .Cancel {
+            border: 0;
+            width: 200px;
+            height: 40px;
+            color: white;
+            margin-left: $metric-x-small;
+            font-size: $metric-small;
+            background-color: $color-darkblue;
+
+            &:hover {
+                opacity: 0.8;
+                cursor: pointer;
+            }
+        }
+    }
+}

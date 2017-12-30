@@ -5,6 +5,7 @@ class bookStore {
   constructor() {
     extendObservable(this, {
       books: [],
+      isPopupShown: false,
 
       fetchBookList: action( () => {
         axios.get('http://localhost:8080/books')
@@ -38,7 +39,7 @@ class bookStore {
           });
           setTimeout(() => {
             this.books = currentBooks;
-          },100)
+          },500)
           
         }, (err) => {
           console.log(err);

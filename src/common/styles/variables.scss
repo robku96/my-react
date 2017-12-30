@@ -1,6 +1,7 @@
 /*
   variables.scss - defines all globally used variables
 */
+@import url('http://fonts.googleapis.com/css?family=Caveat+Brush&subset=latin,latin-ext');
 
 // Colors
 $color-white: #fff;
@@ -18,3 +19,4 @@ $metric-x-large: 80px;
 $metric-xx-large: 96px;
 
 // Fonts
+$font-header: 'Caveat Brush', sans-serif;

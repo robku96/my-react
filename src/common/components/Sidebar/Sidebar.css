@@ -1,6 +1,7 @@
 /*
   variables.scss - defines all globally used variables
 */
+@import url("http://fonts.googleapis.com/css?family=Caveat+Brush&subset=latin,latin-ext");
 .Sidebar {
   display: flex;
   flex-direction: column;
@@ -10,4 +11,6 @@
   background-color: #189ad3;
   -webkit-box-shadow: 3px 1px 56px -11px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 3px 1px 56px -11px rgba(0, 0, 0, 0.75);
-  box-shadow: 3px 1px 56px -11px rgba(0, 0, 0, 0.75); }
+  box-shadow: 3px 1px 56px -11px rgba(0, 0, 0, 0.75);
+}
+/*# sourceMappingURL=Sidebar.css.map */

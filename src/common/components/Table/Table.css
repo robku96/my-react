@@ -28,7 +28,7 @@
   text-align: center;
   justify-content: center;
   background-color: #189ad3;
-  font-family: 'Caveat Brush', sans-serif;
+  font-family: "Caveat Brush", sans-serif;
   font-size: 24px;
 }
 
@@ -50,7 +50,7 @@
   padding: 2px;
 }
 
-.Table .Row .Cell .RoundButton {
+.Table .Row .Cell .Edit {
   display: flex-end;
   outline: none;
   border: 0;
@@ -61,26 +61,23 @@
   cursor: pointer;
 }
 
-.Table .Row .Cell .RoundButton .Icon {
+.Table .Row .Cell .Edit .Icon {
   height: 24px;
 }
 
-.Table .Row .Cell .RoundButton .Popup {
-  position: fixed;
-  top: 380px;
-  right: 140px;
-  width: 250px;
-  height: 250px;
-  padding: 45px;
-  color: #fff;
-  background-color: #189ad3;
-  border-radius: 200px 200px 0px 200px;
-  -moz-border-radius: 200px 200px 0px 200px;
-  -webkit-border-radius: 200px 200px 0px 200px;
-  border: 0px none;
-  -webkit-box-shadow: -16px -19px 167px -28px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: -16px -19px 167px -28px rgba(0, 0, 0, 0.75);
-  box-shadow: -16px -19px 167px -28px rgba(0, 0, 0, 0.75);
+.Table .Row .Cell .Delete {
+  display: flex-end;
+  outline: none;
+  border: 0;
+  height: 36.8px;
+  width: 36.8px;
+  border-radius: 30%;
+  background-color: white;
+  cursor: pointer;
+}
+
+.Table .Row .Cell .Delete .Icon {
+  height: 24px;
 }
 
 .Table .Row:hover {

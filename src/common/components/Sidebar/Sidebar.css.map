@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "ACAA;;EAEE;AACF,OAAO,CAAC,iFAAI;ADDZ,AAAA,QAAQ,CAAA;EACJ,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,eAAe,EAAE,MAAM;EACvB,KAAK,ECWQ,IAAI;EDVjB,MAAM,EAAE,KAAK;EACb,gBAAgB,ECDP,OAAO;EDEhB,kBAAkB,EAAE,GAAG,CAAC,GAAG,CAAC,IAAI,CAAE,KAAI,CAAC,mBAAgB;EACvD,eAAe,EAAE,GAAG,CAAC,GAAG,CAAC,IAAI,CAAE,KAAI,CAAC,mBAAgB;EACpD,UAAU,EAAE,GAAG,CAAC,GAAG,CAAC,IAAI,CAAE,KAAI,CAAC,mBAAgB;CAClD",
+    "sources": [
+        "Sidebar.scss",
+        "../../styles/variables.scss"
+    ],
+    "names": [],
+    "file": "Sidebar.css"
+}

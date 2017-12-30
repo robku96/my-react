@@ -19,7 +19,7 @@ var books = [
     {
         id: 1,
         title: "Wprowadzenie do HTML5",
-        authorId: [1,2,3,4,1],
+        authorId: [1,2],
         publication_year: "2011",
         publishing_house: "Helion",
         pages: "240",

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MyButton from '../MyButton/MyButton.js';
 import Edit from '../../icons/edit.svg';
 import Delete from '../../icons/delete.svg';
-import mobx from 'mobx';
+import * as mobx from 'mobx'
 import { observer, inject } from "mobx-react";
 import './Table.css';
 
@@ -34,9 +34,10 @@ const Table = inject("bookStore")(observer(
             var currentBooks = this.state.books;
             currentBooks.forEach((book) => {
                 if(book.id === id){
-                    currentBooks.splice(currentBooks.indexOf(book));
+                    currentBooks.splice(currentBooks.indexOf(book),1);
+                    console.log("usunieto:",book.id);
                 }
-            })
+            });
             this.setState({
                 books: currentBooks,
             })
@@ -63,21 +64,15 @@ const Table = inject("bookStore")(observer(
                                     return <div key={index} className="Cell">{obj}</div>
                                 })
                             }
-                                <div className="Cell" onClick={ () => this.handleClick(content.id)}>
-                                    <MyButton buttonClass="RoundButton"
-                                        iconClass="Icon"
-                                        buttonClassClicked="Clicked"
-                                        source={Edit}
-                                        popupClass="Popup"
-                                    />
+                                <div className="Cell">
+                                    <MyButton className="Edit">
+                                        <img src={ Edit } className="Icon" alt="edit"/>
+                                    </MyButton>    
                                 </div>
-                                <div className="Cell" onClick={ () => this.handleClick(content.id)}>
-                                    <MyButton buttonClass="RoundButton"
-                                        iconClass="Icon"
-                                        buttonClassClicked="Clicked"
-                                        source={Delete}
-                                        popupClass="Popup"
-                                    />
+                                <div className="Cell">
+                                    <MyButton className="Delete" onClick={ () => this.deleteBook(content.id)}>
+                                        <img src={ Delete } className="Icon" alt="delete"/>
+                                    </MyButton>
                                 </div>
                             </div>
                         })

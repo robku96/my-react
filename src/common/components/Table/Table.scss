@@ -1,5 +1,4 @@
 @import '../../../common/styles/variables.scss';
-@import url('http://fonts.googleapis.com/css?family=Caveat+Brush&subset=latin,latin-ext');
 @import url('http://fonts.googleapis.com/css?family=Coiny&subset=latin,latin-ext');
 
 .Table {
@@ -25,7 +24,7 @@
             text-align: center;
             justify-content: center;
             background-color: $color-blue;
-            font-family: 'Caveat Brush', sans-serif;
+            font-family: $font-header;
             font-size:24px;
         }
     }
@@ -46,7 +45,7 @@
                 padding: 2px;
             }
 
-            .RoundButton {
+            .Edit {
                 display: flex-end;
                 outline: none;;
                 border: 0;
@@ -54,31 +53,25 @@
                 width: $metric-small*2.3;
                 border-radius: 30%;
                 background-color:white;
-                cursor: pointer;   
-                
+                cursor: pointer;              
             
                 .Icon {
                     height: $metric-x-small*3;
                 }
+            }   
+
+            .Delete {
+                display: flex-end;
+                outline: none;;
+                border: 0;
+                height: $metric-small*2.3;
+                width: $metric-small*2.3;
+                border-radius: 30%;
+                background-color:white;
+                cursor: pointer;              
             
-                
-            
-            
-            
-                .Popup {
-                    position: fixed; top:380px; right: 140px;
-                    width: 250px;
-                    height: 250px;
-                    padding: 45px;
-                    color: $color-white;
-                    background-color: $color-blue;
-                    border-radius: 200px 200px 0px 200px;
-                    -moz-border-radius: 200px 200px 0px 200px;
-                    -webkit-border-radius: 200px 200px 0px 200px;
-                    border: 0px none ;
-                    -webkit-box-shadow: -16px -19px 167px -28px rgba(0,0,0,0.75);
-                    -moz-box-shadow: -16px -19px 167px -28px rgba(0,0,0,0.75);
-                    box-shadow: -16px -19px 167px -28px rgba(0,0,0,0.75);
+                .Icon {
+                    height: $metric-x-small*3;
                 }
             }   
         }
