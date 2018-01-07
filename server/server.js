@@ -12,9 +12,6 @@ app.use(function(req, res, next) {
     next();
 });
 
-var bookId = 9;
-var authorId = 6;
-
 var books = [
     {
         id: 1,
@@ -155,6 +152,13 @@ function findBook(id) {
     return null;
 }
 
+// POST – dodanie elementu do kolekcji
+app.post('/books', function (req, res) {
+    var book = req.body;
+    books.push(book);
+    res.send(book);
+});
+
 // PUT/id – edycja elementu kolekcji
 app.put('/books/:id', function (req, res) {
     var book = req.body;
@@ -163,9 +167,13 @@ app.put('/books/:id', function (req, res) {
         res.send(404);
     }
     else {
-        currentBook.firstName = book.firstName;
-        currentBook.lastName = book.lastName;
-        res.send(person);
+        currentBook.title = book.title;
+        currentBook.authorId = book.authorId;
+        currentBook.publication_year = book.publication_year;
+        currentBook.publishing_house = book.publishing_house;
+        currentBook.pages = book.pages;
+        currentBook.price = book.price;
+        res.send(book);
     }
 });
 

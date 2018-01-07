@@ -5,10 +5,10 @@
     display: flex;
     flex-direction: column;
     text-align:left;
-    top: 100px; 
+    top: 80px; 
     left: 550px; 
-    width: 600px;
-    height: 550px;
+    width: 620px;
+    height: 620px;
     padding: 45px;
     color: $color-white;
     background-color: $color-blue;
@@ -16,6 +16,10 @@
     -webkit-box-shadow: -3px 2px 93px 3px rgba(0,0,0,0.75);
     -moz-box-shadow: -3px 2px 93px 3px rgba(0,0,0,0.75);
     box-shadow: -3px 2px 93px 3px rgba(0,0,0,0.75);
+
+    h1 {
+        font-family: $font-header;
+    }
 
     .Label {
         padding-top: $metric-x-small;
@@ -26,9 +30,11 @@
 
     .Input {
         padding: $metric-x-small /4;
-        font-size: 18px;
+        font-size: $metric-base;
         border: 0;
-        border-radius: 4px;
+        color: $color-blue;
+        border-radius: $metric-x-small /2;
+        font-family: $font-header;
     }
 
     .buttonsForm {

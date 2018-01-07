@@ -5,49 +5,37 @@
 .Footer {
   display: flex;
   justify-content: flex-end;
-  width: 100%;
-}
-
-.Footer .RoundButton {
-  display: flex-end;
-  outline: none;
-  margin: 48px;
-  border: 0;
-  height: 72px;
-  width: 72px;
-  border-radius: 50%;
-  background-color: #189ad3;
-  cursor: pointer;
-  -webkit-box-shadow: 26px 33px 131px -5px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 26px 33px 131px -5px rgba(0, 0, 0, 0.75);
-  box-shadow: 26px 33px 131px -5px rgba(0, 0, 0, 0.75);
-}
-
-.Footer .RoundButton .Icon {
-  height: 32px;
-}
-
-.Footer .RoundButton:hover {
-  opacity: 0.8;
-  background-color: #172B4D;
-}
-
-.Footer .RoundButtonClicked {
-  background-color: #172B4D;
-  display: flex-end;
-  outline: none;
-  margin: 48px;
-  border: 0;
-  height: 72px;
-  width: 72px;
-  border-radius: 50%;
-  background-color: #189ad3;
-  -webkit-box-shadow: 26px 33px 131px -5px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 26px 33px 131px -5px rgba(0, 0, 0, 0.75);
-  box-shadow: 26px 33px 131px -5px rgba(0, 0, 0, 0.75);
-}
-
-.Footer .RoundButtonClicked .Icon {
-  height: 32px;
-}
-/*# sourceMappingURL=Footer.css.map */
+  width: 100%; }
+  .Footer .RoundButton {
+    display: flex-end;
+    outline: none;
+    margin: 48px;
+    border: 0;
+    height: 72px;
+    width: 72px;
+    border-radius: 50%;
+    background-color: #189ad3;
+    cursor: pointer;
+    -webkit-box-shadow: 26px 33px 131px -5px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 26px 33px 131px -5px rgba(0, 0, 0, 0.75);
+    box-shadow: 26px 33px 131px -5px rgba(0, 0, 0, 0.75); }
+    .Footer .RoundButton .Icon {
+      height: 32px; }
+    .Footer .RoundButton:hover {
+      opacity: 0.8;
+      background-color: #172B4D; }
+  .Footer .RoundButtonClicked {
+    background-color: #172B4D;
+    display: flex-end;
+    outline: none;
+    margin: 48px;
+    border: 0;
+    height: 72px;
+    width: 72px;
+    border-radius: 50%;
+    background-color: #189ad3;
+    -webkit-box-shadow: 26px 33px 131px -5px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 26px 33px 131px -5px rgba(0, 0, 0, 0.75);
+    box-shadow: 26px 33px 131px -5px rgba(0, 0, 0, 0.75); }
+    .Footer .RoundButtonClicked .Icon {
+      height: 32px; }

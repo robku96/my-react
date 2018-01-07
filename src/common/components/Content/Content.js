@@ -4,18 +4,18 @@ import Table from '../Table/Table.js';
 import { observer, inject } from "mobx-react";
 import './Content.css';
 
-const Content = inject("bookStore")(observer(
+const Content = inject("bookStore","authorStore")(observer(
   class Content extends Component {
     headers = [
       'Id',
-      'Tytuł',
-      'Autor',
-      'Rok wydania',
-      'Wydawnictwo',
-      'Ilość stron',
-      'Cena',
-      'Edytuj',
-      'Usuń'
+      'Title',
+      'Authors',
+      'Publication year',
+      'Publishing house',
+      'Pages',
+      'Price',
+      'Edit',
+      'Delete'
     ]
 
     componentWillMount(){

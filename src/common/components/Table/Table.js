@@ -70,7 +70,7 @@ const Table = inject("bookStore")(observer(
                                     </MyButton>    
                                 </div>
                                 <div className="Cell">
-                                    <MyButton className="Delete" onClick={ () => this.deleteBook(content.id)}>
+                                    <MyButton className="Delete" onClick={ () => this.handleClick(content.id)}>
                                         <img src={ Delete } className="Icon" alt="delete"/>
                                     </MyButton>
                                 </div>
