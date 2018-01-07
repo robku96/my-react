@@ -5,7 +5,12 @@ class bookStore {
   constructor() {
     extendObservable(this, {
       books: [],
-      isPopupShown: false,
+      book: '',
+      bookPopup: {
+        title: '',
+        idBook: null,
+        isPopupShown: false
+      },
       id: 8,
 
       fetchBookList: action( () => {
@@ -49,7 +54,7 @@ class bookStore {
       fetchBook: action( (id) => {
         axios.get('http://localhost:8080/books/'+id)
         .then((response) => {
-          this.books = response.data;
+          this.book = response.data;
         }, (err) => {
           console.log(err);
         });
@@ -85,7 +90,17 @@ class bookStore {
             },200)
           }
           else {
-            // TOD0 second condition of adding authors
+            newAuthors = "";
+            axios.get('http://localhost:8080/authors/'+authors)
+            .then((response) => {
+              newAuthors = response.data.name+" "+response.data.surname;
+            }, (err) => {
+              console.log(err);
+            });
+            newBook.authorId = newAuthors;
+            setTimeout(() => {
+              this.books.push(newBook);
+            },200)
           }
         },(error) => {
           console.log(error);

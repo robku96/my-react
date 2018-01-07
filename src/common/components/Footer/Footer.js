@@ -15,15 +15,20 @@ const Footer = inject("bookStore")(observer(
     }
 
     handleClick() {
-      this.props.bookStore.isPopupShown = true;
+      const bookPopup = {
+        title: "Add new book",
+        id: null, 
+        isPopupShown: true
+      }
+      this.props.bookStore.bookPopup = bookPopup;
     }
 
     render() {
-      const { isPopupShown } = this.props.bookStore;
+      const { isPopupShown } = this.props.bookStore.bookPopup;
       return (
         <div className="Footer">
           {isPopupShown ? (
-            <BookPopup />
+            <BookPopup title={this.props.bookStore.bookPopup.title} id={this.props.bookStore.bookPopup.idBook}/>
           ) : (
               <MyButton className="RoundButton" onClick={this.handleClick}>
                 <img src={Add} className="Icon" alt="icon" />

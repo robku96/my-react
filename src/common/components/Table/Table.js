@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MyButton from '../MyButton/MyButton.js';
+import BookPopup from '../BookPopup/BookPopup.js';
 import Edit from '../../icons/edit.svg';
 import Delete from '../../icons/delete.svg';
 import * as mobx from 'mobx'
@@ -13,17 +14,26 @@ const Table = inject("bookStore")(observer(
             this.state = {
                 books: [],
             }
-            this.handleClick = this.handleClick.bind(this);
+            this.handleClickDelete = this.handleClickDelete.bind(this);
             this.deleteBook = this.deleteBook.bind(this);
         }
 
-        handleClick(id) {
+        handleClickEdit(id) {
+            const bookPopup = {
+                title: "Edit book",
+                id: id,
+                isPopupShown: true
+            }
+            this.props.bookStore.bookPopup = bookPopup;
+        }
+
+        handleClickDelete(id) {
             this.deleteBook(id);
             this.props.bookStore.deleteBook(id);
         }
 
         componentWillReceiveProps() {
-            setTimeout(()=>{
+            setTimeout(() => {
                 this.setState({
                     books: this.props.data,
                 })
@@ -33,9 +43,9 @@ const Table = inject("bookStore")(observer(
         deleteBook(id) {
             var currentBooks = this.state.books;
             currentBooks.forEach((book) => {
-                if(book.id === id){
-                    currentBooks.splice(currentBooks.indexOf(book),1);
-                    console.log("usunieto:",book.id);
+                if (book.id === id) {
+                    currentBooks.splice(currentBooks.indexOf(book), 1);
+                    console.log("usunieto:", book.id);
                 }
             });
             this.setState({
@@ -64,14 +74,14 @@ const Table = inject("bookStore")(observer(
                                     return <div key={index} className="Cell">{obj}</div>
                                 })
                             }
-                                <div className="Cell">
+                                <div className="Cell" onClick={() => this.handleClickEdit(content.id)}>
                                     <MyButton className="Edit">
-                                        <img src={ Edit } className="Icon" alt="edit"/>
-                                    </MyButton>    
+                                        <img src={Edit} className="Icon" alt="edit" />
+                                    </MyButton>
                                 </div>
                                 <div className="Cell">
-                                    <MyButton className="Delete" onClick={ () => this.handleClick(content.id)}>
-                                        <img src={ Delete } className="Icon" alt="delete"/>
+                                    <MyButton className="Delete" onClick={() => this.handleClickDelete(content.id)}>
+                                        <img src={Delete} className="Icon" alt="delete" />
                                     </MyButton>
                                 </div>
                             </div>

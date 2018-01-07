@@ -5,12 +5,12 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import './BookPopup.css';
 
-const BookPopup = inject("bookStore","authorStore")(observer(
+const BookPopup = inject("bookStore", "authorStore")(observer(
     class BookPopup extends Component {
         constructor(props) {
             super(props);
             this.state = {
-                title: '',  
+                title: '',
                 authors: [],
                 authorsId: [],
                 publicationYear: '',
@@ -29,10 +29,12 @@ const BookPopup = inject("bookStore","authorStore")(observer(
             this.handleChangePrice = this.handleChangePrice.bind(this);
             this.handleClickCancel = this.handleClickCancel.bind(this);
             this.handleClickAdd = this.handleClickAdd.bind(this);
+            this.getEditableBook = this.getEditableBook.bind(this);
         }
 
         componentWillMount() {
             this.getAuthorsListForSelectComponent();
+            this.getEditableBook(this.props.bookStore.bookPopup.id);
         }
 
         getAuthorsListForSelectComponent() {
@@ -41,24 +43,31 @@ const BookPopup = inject("bookStore","authorStore")(observer(
             this.props.authorStore.fetchAuthorList();
             setTimeout(() => {
                 currentAuthors = this.props.authorStore.authors;
-            },600);
+            }, 600);
             setTimeout(() => {
                 currentAuthors.map((author) => {
                     const newAuthor = {
-                        label: author.name+" "+author.surname,
+                        label: author.name + " " + author.surname,
                         value: author.id,
                     }
                     currentAuthorsForSelectComponent.push(newAuthor);
                 })
-            },700)
+            }, 700)
             setTimeout(() => {
-                this.setState({authorsListForSelectComponent: currentAuthorsForSelectComponent});
-            },800)
+                this.setState({ authorsListForSelectComponent: currentAuthorsForSelectComponent });
+            }, 800)
+        }
+
+        getEditableBook(id) {
+            this.props.bookStore.fetchBook(id);
+            setTimeout(() => {
+                console.log(this.props.bookStore.book);
+            },600)
         }
 
         handleChangeTitle(event) {
-            this.setState({title: event.target.value});
-        } 
+            this.setState({ title: event.target.value });
+        }
 
         handleChangeAuthors = (authors) => {
             this.setState({ authors });
@@ -70,43 +79,53 @@ const BookPopup = inject("bookStore","authorStore")(observer(
                     var onlyAuthorId = author.value;
                     newArrayOfAuthorsId.push(onlyAuthorId);
                 })
-            },100)
+            }, 100)
             setTimeout(() => {
-                this.setState({ authorsId: newArrayOfAuthorsId});
-            },200)
+                this.setState({ authorsId: newArrayOfAuthorsId });
+            }, 200)
         }
 
         handleChangePublicationYear(event) {
-            this.setState({publicationYear: event.target.value});
+            this.setState({ publicationYear: event.target.value });
         }
 
         handleChangePublishingHouse(event) {
-            this.setState({publishingHouse: event.target.value});
+            this.setState({ publishingHouse: event.target.value });
         }
 
         handleChangePages(event) {
-            this.setState({pages: event.target.value});
+            this.setState({ pages: event.target.value });
         }
 
         handleChangePrice(event) {
-            this.setState({price: event.target.value});
+            this.setState({ price: event.target.value });
         }
 
         handleClickCancel() {
-            this.props.bookStore.isPopupShown = false;
+            const bookPopup = {
+                title: '',
+                id: null,
+                isPopupShown: false
+            }
+            this.props.bookStore.bookPopup = bookPopup;
         }
 
         handleClickAdd(id, title, authors, publicationYear, publishingHouse, pages, price) {
-            this.props.bookStore.addBook(id, title, authors, publicationYear, publishingHouse, pages,price);
-            this.props.bookStore.isPopupShown = false;   
+            this.props.bookStore.addBook(id, title, authors, publicationYear, publishingHouse, pages, price);
+            const bookPopup = {
+                title: '',
+                id: null,
+                isPopupShown: false
+            }
+            this.props.bookStore.bookPopup = bookPopup;
             this.props.bookStore.id++;
         }
 
         render() {
-            const { id, title, authorsId, publicationYear, publishingHouse, pages, price} = this.state;
+            const { id, title, authorsId, publicationYear, publishingHouse, pages, price } = this.state;
             return (
                 <div className="Popup">
-                    <h1>Add new book</h1>
+                    <h1>{this.props.title}</h1>
                     <br></br>
                     <label className="Label">Title </label>
                     <input className="Input" type="text" value={this.state.title} onChange={this.handleChangeTitle}></input>
@@ -127,8 +146,8 @@ const BookPopup = inject("bookStore","authorStore")(observer(
                     <label className="Label">Price</label>
                     <input className="Input" type="text" value={this.state.price} onChange={this.handleChangePrice}></input>
                     <div className="buttonsForm">
-                        <MyButton className="Cancel" onClick={ this.handleClickCancel}>Cancel</MyButton>
-                        <MyButton className="Add" onClick={ () => this.handleClickAdd(id, title, authorsId, publicationYear, publishingHouse, pages, price)}>Add</MyButton>
+                        <MyButton className="Cancel" onClick={this.handleClickCancel}>Cancel</MyButton>
+                        <MyButton className="Add" onClick={() => this.handleClickAdd(id, title, authorsId, publicationYear, publishingHouse, pages, price)}>Add</MyButton>
                     </div>
                 </div>
             )

@@ -230,6 +230,14 @@ function findAuthor(id) {
     return null;
 }
 
+
+// POST – dodanie elementu do kolekcji
+app.post('/authors', function (req, res) {
+    var author = req.body;
+    authors.push(author);
+    res.send(author);
+});
+
 // PUT/id – edycja elementu kolekcji
 app.put('/authors/:id', function (req, res) {
     var author = req.body;
