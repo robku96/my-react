@@ -59,10 +59,14 @@ const BookPopup = inject("bookStore", "authorStore")(observer(
         }
 
         getEditableBook(id) {
+            
+            
             this.props.bookStore.fetchBook(id);
+                
+            
             setTimeout(() => {
                 console.log(this.props.bookStore.book);
-            },600)
+            },1000)
         }
 
         handleChangeTitle(event) {

@@ -5,7 +5,7 @@ class bookStore {
   constructor() {
     extendObservable(this, {
       books: [],
-      book: '',
+      book: {},
       bookPopup: {
         title: '',
         idBook: null,
@@ -54,7 +54,36 @@ class bookStore {
       fetchBook: action( (id) => {
         axios.get('http://localhost:8080/books/'+id)
         .then((response) => {
-          this.book = response.data;
+          const currentBook =  response.data;
+          const currentAuthor = response.data.authorId;
+          var newAuthors = [];
+          if(Array.isArray(currentAuthor)) {
+            currentAuthor.forEach( (author) => {
+              axios.get('http://localhost:8080/authors/'+author)
+              .then((response) => {
+                newAuthors.push(response.data.name+" "+response.data.surname);
+              }, (err) => {
+                console.log(err);
+              });
+            })
+            setTimeout(() => {
+              currentBook.authorId = newAuthors;
+              this.book = currentBook;
+            },500)
+          }
+          else {
+            newAuthors = "";
+            axios.get('http://localhost:8080/authors/'+currentAuthor)
+            .then((response) => {
+              newAuthors = response.data.name+" "+response.data.surname;
+            }, (err) => {
+              console.log(err);
+            });
+            setTimeout(() => {
+              currentBook.authorId = newAuthors;
+              this.book = currentBook;
+            },500)
+          }
         }, (err) => {
           console.log(err);
         });

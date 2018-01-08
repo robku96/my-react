@@ -19,6 +19,7 @@ const Table = inject("bookStore")(observer(
         }
 
         handleClickEdit(id) {
+            console.log(id);
             const bookPopup = {
                 title: "Edit book",
                 id: id,
