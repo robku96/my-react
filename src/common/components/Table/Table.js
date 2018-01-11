@@ -18,14 +18,13 @@ const Table = inject("bookStore")(observer(
             this.deleteBook = this.deleteBook.bind(this);
         }
 
-        handleClickEdit(id) {
-            console.log(id);
-            const bookPopup = {
+        handleClickEdit(index) {
+            console.log(index);
+            this.props.bookStore.bookPopup = {
                 title: "Edit book",
-                id: id,
+                idBook: index,
                 isPopupShown: true
-            }
-            this.props.bookStore.bookPopup = bookPopup;
+            };
         }
 
         handleClickDelete(id) {

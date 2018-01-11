@@ -5,7 +5,15 @@ class bookStore {
   constructor() {
     extendObservable(this, {
       books: [],
-      book: {},
+      book: {
+        id: '',
+        title: '',
+        authorId: [],
+        publicationYear: '',
+        publishingHouse: '',
+        pages: '',
+        price: '',
+      },
       bookPopup: {
         title: '',
         idBook: null,
@@ -61,28 +69,48 @@ class bookStore {
             currentAuthor.forEach( (author) => {
               axios.get('http://localhost:8080/authors/'+author)
               .then((response) => {
-                newAuthors.push(response.data.name+" "+response.data.surname);
+                newAuthors.push({
+                  label: response.data.name+" "+response.data.surname,
+                  value: response.data.id
+                });
               }, (err) => {
                 console.log(err);
               });
             })
             setTimeout(() => {
               currentBook.authorId = newAuthors;
-              this.book = currentBook;
-            },500)
+              this.book = {
+                id: currentBook.id,
+                title: currentBook.title,
+                authorId: currentBook.authorId,
+                publicationYear: currentBook.publication_year,
+                publishingHouse: currentBook.publishing_house,
+                pages: currentBook.pages,
+                price: currentBook.price
+              }
+            },100)
           }
           else {
             newAuthors = "";
             axios.get('http://localhost:8080/authors/'+currentAuthor)
-            .then((response) => {
-              newAuthors = response.data.name+" "+response.data.surname;
+            .then((response) => { 
+              label: response.data.name+" "+response.data.surname;
+              value: response.data.id;
             }, (err) => {
               console.log(err);
             });
             setTimeout(() => {
               currentBook.authorId = newAuthors;
-              this.book = currentBook;
-            },500)
+              this.book = {
+                id: currentBook.id,
+                title: currentBook.title,
+                authorId: currentBook.authorId,
+                publicationYear: currentBook.publication_year,
+                publishingHouse: currentBook.publication_house,
+                pages: currentBook.pages,
+                price: currentBook.price
+              }
+            },100)
           }
         }, (err) => {
           console.log(err);

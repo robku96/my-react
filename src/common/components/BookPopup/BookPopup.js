@@ -34,7 +34,38 @@ const BookPopup = inject("bookStore", "authorStore")(observer(
 
         componentWillMount() {
             this.getAuthorsListForSelectComponent();
-            this.getEditableBook(this.props.bookStore.bookPopup.id);
+            if(this.props.bookStore.bookPopup.isPopupShown === true) {
+                this.getEditableBook(this.props.bookStore.bookPopup.idBook);
+            }
+
+            /*const www = this.props.bookStore.books;
+            const id = this.props.bookStore.bookPopup.idBook;
+
+            www.map((book) => {
+                if(book.id === id){
+                    this.setState({
+                        title: book.title,
+                        authors: [1,2],
+                        authorsListForSelectComponent: book.authorId,
+                        publicationYear: book.publicationYear,
+                        publishingHouse: book.publishingHouse,
+                        pages: book.pages,
+                        price: book.price
+                    })
+                }
+            })*/
+
+            setTimeout(() => {
+                this.setState({
+                    title: this.props.bookStore.book.title,
+                    authors: [1,2],
+                    authorsListForSelectComponent: this.props.bookStore.book.authorId,
+                    publicationYear: this.props.bookStore.book.publicationYear,
+                    publishingHouse: this.props.bookStore.book.publishingHouse,
+                    pages: this.props.bookStore.book.pages,
+                    price: this.props.bookStore.book.price
+                })
+            },600)
         }
 
         getAuthorsListForSelectComponent() {
@@ -59,14 +90,7 @@ const BookPopup = inject("bookStore", "authorStore")(observer(
         }
 
         getEditableBook(id) {
-            
-            
-            this.props.bookStore.fetchBook(id);
-                
-            
-            setTimeout(() => {
-                console.log(this.props.bookStore.book);
-            },1000)
+            this.props.bookStore.fetchBook(id);       
         }
 
         handleChangeTitle(event) {
