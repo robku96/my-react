@@ -18,8 +18,9 @@ const Content = inject("bookStore","authorStore")(observer(
       'Delete'
     ]
 
-    componentWillMount(){
+    componentDidMount(){
       this.props.bookStore.fetchBookList();
+      this.props.authorStore.fetchAuthorList();
     }
 
     render() {

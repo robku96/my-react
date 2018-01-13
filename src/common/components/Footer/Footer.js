@@ -18,7 +18,8 @@ const Footer = inject("bookStore")(observer(
       const bookPopup = {
         title: "Add new book",
         id: null, 
-        isPopupShown: true
+        isPopupShown: true,
+        action: "add"
       }
       this.props.bookStore.bookPopup = bookPopup;
     }

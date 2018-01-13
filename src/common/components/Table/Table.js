@@ -20,10 +20,12 @@ const Table = inject("bookStore")(observer(
 
         handleClickEdit(index) {
             console.log(index);
+            this.props.bookStore.fetchBook(index);
             this.props.bookStore.bookPopup = {
                 title: "Edit book",
                 idBook: index,
-                isPopupShown: true
+                isPopupShown: true,
+                action: "edit"
             };
         }
 

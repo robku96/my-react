@@ -28,69 +28,46 @@ const BookPopup = inject("bookStore", "authorStore")(observer(
             this.handleChangePages = this.handleChangePages.bind(this);
             this.handleChangePrice = this.handleChangePrice.bind(this);
             this.handleClickCancel = this.handleClickCancel.bind(this);
-            this.handleClickAdd = this.handleClickAdd.bind(this);
-            this.getEditableBook = this.getEditableBook.bind(this);
+            this.handleClick = this.handleClick.bind(this);
         }
 
-        componentWillMount() {
+        componentDidMount() {
             this.getAuthorsListForSelectComponent();
-            if(this.props.bookStore.bookPopup.isPopupShown === true) {
-                this.getEditableBook(this.props.bookStore.bookPopup.idBook);
-            }
+            setTimeout(() => {
+                const book = this.props.bookStore.book;
+                const id = this.props.bookStore.bookPopup.idBook;
+                const authors = this.props.bookStore.book.authors;
+                let newArray = [];
 
-            /*const www = this.props.bookStore.books;
-            const id = this.props.bookStore.bookPopup.idBook;
+                authors.map((obj) => {
+                    newArray.push(obj);
+                })
 
-            www.map((book) => {
-                if(book.id === id){
+                if (book.id === id) {
                     this.setState({
                         title: book.title,
-                        authors: [1,2],
-                        authorsListForSelectComponent: book.authorId,
+                        authors: newArray,
                         publicationYear: book.publicationYear,
                         publishingHouse: book.publishingHouse,
                         pages: book.pages,
                         price: book.price
                     })
                 }
-            })*/
-
-            setTimeout(() => {
-                this.setState({
-                    title: this.props.bookStore.book.title,
-                    authors: [1,2],
-                    authorsListForSelectComponent: this.props.bookStore.book.authorId,
-                    publicationYear: this.props.bookStore.book.publicationYear,
-                    publishingHouse: this.props.bookStore.book.publishingHouse,
-                    pages: this.props.bookStore.book.pages,
-                    price: this.props.bookStore.book.price
-                })
-            },600)
+            }, 200)
         }
 
         getAuthorsListForSelectComponent() {
             var currentAuthors = [];
             var currentAuthorsForSelectComponent = [];
-            this.props.authorStore.fetchAuthorList();
-            setTimeout(() => {
-                currentAuthors = this.props.authorStore.authors;
-            }, 600);
-            setTimeout(() => {
-                currentAuthors.map((author) => {
-                    const newAuthor = {
-                        label: author.name + " " + author.surname,
-                        value: author.id,
-                    }
-                    currentAuthorsForSelectComponent.push(newAuthor);
-                })
-            }, 700)
-            setTimeout(() => {
-                this.setState({ authorsListForSelectComponent: currentAuthorsForSelectComponent });
-            }, 800)
-        }
-
-        getEditableBook(id) {
-            this.props.bookStore.fetchBook(id);       
+            currentAuthors = this.props.authorStore.authors;
+            currentAuthors.map((author) => {
+                const newAuthor = {
+                    label: author.name + " " + author.surname,
+                    value: author.id,
+                }
+                currentAuthorsForSelectComponent.push(newAuthor);
+            })
+            this.setState({ authorsListForSelectComponent: currentAuthorsForSelectComponent });
         }
 
         handleChangeTitle(event) {
@@ -107,10 +84,10 @@ const BookPopup = inject("bookStore", "authorStore")(observer(
                     var onlyAuthorId = author.value;
                     newArrayOfAuthorsId.push(onlyAuthorId);
                 })
-            }, 100)
+            }, 50)
             setTimeout(() => {
                 this.setState({ authorsId: newArrayOfAuthorsId });
-            }, 200)
+            }, 100)
         }
 
         handleChangePublicationYear(event) {
@@ -133,20 +110,33 @@ const BookPopup = inject("bookStore", "authorStore")(observer(
             const bookPopup = {
                 title: '',
                 id: null,
-                isPopupShown: false
+                isPopupShown: false,
+                action: null
             }
             this.props.bookStore.bookPopup = bookPopup;
         }
 
-        handleClickAdd(id, title, authors, publicationYear, publishingHouse, pages, price) {
-            this.props.bookStore.addBook(id, title, authors, publicationYear, publishingHouse, pages, price);
-            const bookPopup = {
-                title: '',
-                id: null,
-                isPopupShown: false
+        handleClick(id, title, authors, publicationYear, publishingHouse, pages, price) {
+            const action = this.props.bookStore.bookPopup.action;
+            if (action === "add") {
+                this.props.bookStore.addBook(id, title, authors, publicationYear, publishingHouse, pages, price);
+                const bookPopup = {
+                    title: '',
+                    id: null,
+                    isPopupShown: false
+                }
+                this.props.bookStore.bookPopup = bookPopup;
+                this.props.bookStore.id++;
             }
-            this.props.bookStore.bookPopup = bookPopup;
-            this.props.bookStore.id++;
+            else if (action === "edit") {
+                this.props.bookStore.editBook(id, title, authors, publicationYear, publishingHouse, pages, price);
+                const bookPopup = {
+                    title: '',
+                    id: null,
+                    isPopupShown: false
+                }
+                this.props.bookStore.bookPopup = bookPopup;
+            }
         }
 
         render() {
@@ -175,7 +165,7 @@ const BookPopup = inject("bookStore", "authorStore")(observer(
                     <input className="Input" type="text" value={this.state.price} onChange={this.handleChangePrice}></input>
                     <div className="buttonsForm">
                         <MyButton className="Cancel" onClick={this.handleClickCancel}>Cancel</MyButton>
-                        <MyButton className="Add" onClick={() => this.handleClickAdd(id, title, authorsId, publicationYear, publishingHouse, pages, price)}>Add</MyButton>
+                        <MyButton className="Add" onClick={() => this.handleClick(id, title, authorsId, publicationYear, publishingHouse, pages, price)}>Add</MyButton>
                     </div>
                 </div>
             )

@@ -8,6 +8,7 @@ class bookStore {
       book: {
         id: '',
         title: '',
+        authors: null,
         authorId: [],
         publicationYear: '',
         publishingHouse: '',
@@ -17,108 +18,109 @@ class bookStore {
       bookPopup: {
         title: '',
         idBook: null,
-        isPopupShown: false
+        isPopupShown: false,
+        action: null
       },
       id: 8,
 
-      fetchBookList: action( () => {
+      fetchBookList: action(() => {
+        let currentBooks;
+        let currentAuthor;
         axios.get('http://localhost:8080/books')
-        .then((response) => {
-          var currentBooks = response.data;
-          currentBooks.map((item) => {
-            if(item.authorId){
-              var currentAuthor = item.authorId;
-              if(Array.isArray(currentAuthor)) {
-                item.authorId = [];
-                currentAuthor.forEach( (author) => {
-                  axios.get('http://localhost:8080/authors/'+author)
+          .then((response) => {
+            currentBooks = response.data;
+            currentBooks.map((item) => {
+              if (item.authorId) {
+                currentAuthor = item.authorId;
+                if (Array.isArray(currentAuthor)) {
+                  item.authorId = [];
+                  currentAuthor.forEach((author) => {
+                    axios.get('http://localhost:8080/authors/' + author)
+                      .then((response) => {
+                        item.authorId.push(response.data.name + " " + response.data.surname);
+                      }, (err) => {
+                        console.log(err);
+                      })
+                  })
+                }
+                else {
+                  item.authorId = "";
+                  axios.get('http://localhost:8080/authors/' + currentAuthor)
+                    .then((response) => {
+                      item.authorId = response.data.name + " " + response.data.surname;
+                    }, (err) => {
+                      console.log(err);
+                    })
+                }
+              }
+            });
+          }, (err) => {
+            console.log(err);
+          });
+        setTimeout(() => {
+          this.books = currentBooks;
+        }, 300)
+      }),
+
+      fetchBook: action((id) => {
+        let currentBook;
+        let currentAuthor;
+        let newAuthors;
+        axios.get('http://localhost:8080/books/' + id)
+          .then((response) => {
+            currentBook = response.data;
+            currentAuthor = response.data.authorId;
+            newAuthors = [];
+            if (Array.isArray(currentAuthor)) {
+              currentAuthor.forEach((author) => {
+                axios.get('http://localhost:8080/authors/' + author)
                   .then((response) => {
-                    item.authorId.push(response.data.name+" "+response.data.surname);
+                    newAuthors.push({
+                      label: response.data.name + " " + response.data.surname,
+                      value: response.data.id
+                    });
                   }, (err) => {
                     console.log(err);
                   });
-                })
-              }
-              else {
-                item.authorId = "";
-                axios.get('http://localhost:8080/authors/'+currentAuthor)
+              })
+            }
+            else {
+              newAuthors = "";
+              axios.get('http://localhost:8080/authors/' + currentAuthor)
                 .then((response) => {
-                  item.authorId = response.data.name+" "+response.data.surname;
-                  console.log(item.authorId);
+                  label: response.data.name + " " + response.data.surname;
+                  value: response.data.id;
                 }, (err) => {
                   console.log(err);
                 });
-              }
             }
-          });
-          setTimeout(() => {
-            this.books = currentBooks;
-          },500)
-        }, (err) => {
-          console.log(err);
-        });
+          }, (err) => {
+            console.log(err);
+          })
+        setTimeout(() => {
+          var ids = [];
+          ids = currentAuthor;
+          console.log("przed", ids);
+          currentBook.authorId = newAuthors;
+          this.book = {
+            id: currentBook.id,
+            title: currentBook.title,
+            authors: ids,
+            authorId: currentBook.authorId,
+            publicationYear: currentBook.publication_year,
+            publishingHouse: currentBook.publishing_house,
+            pages: currentBook.pages,
+            price: currentBook.price
+          }
+          console.log("edit book", this.book);
+        }, 200)
       }),
 
-      fetchBook: action( (id) => {
-        axios.get('http://localhost:8080/books/'+id)
-        .then((response) => {
-          const currentBook =  response.data;
-          const currentAuthor = response.data.authorId;
-          var newAuthors = [];
-          if(Array.isArray(currentAuthor)) {
-            currentAuthor.forEach( (author) => {
-              axios.get('http://localhost:8080/authors/'+author)
-              .then((response) => {
-                newAuthors.push({
-                  label: response.data.name+" "+response.data.surname,
-                  value: response.data.id
-                });
-              }, (err) => {
-                console.log(err);
-              });
-            })
-            setTimeout(() => {
-              currentBook.authorId = newAuthors;
-              this.book = {
-                id: currentBook.id,
-                title: currentBook.title,
-                authorId: currentBook.authorId,
-                publicationYear: currentBook.publication_year,
-                publishingHouse: currentBook.publishing_house,
-                pages: currentBook.pages,
-                price: currentBook.price
-              }
-            },100)
-          }
-          else {
-            newAuthors = "";
-            axios.get('http://localhost:8080/authors/'+currentAuthor)
-            .then((response) => { 
-              label: response.data.name+" "+response.data.surname;
-              value: response.data.id;
-            }, (err) => {
-              console.log(err);
-            });
-            setTimeout(() => {
-              currentBook.authorId = newAuthors;
-              this.book = {
-                id: currentBook.id,
-                title: currentBook.title,
-                authorId: currentBook.authorId,
-                publicationYear: currentBook.publication_year,
-                publishingHouse: currentBook.publication_house,
-                pages: currentBook.pages,
-                price: currentBook.price
-              }
-            },100)
-          }
-        }, (err) => {
-          console.log(err);
-        });
-      }),
-
-      addBook: action( (id, title, authorId, publication_year, publishing_house, pages, price) => {
-        axios.post('http://localhost:8080/books',{
+      addBook: action((id, title, authorId, publication_year, publishing_house, pages, price) => {
+        let newBook;
+        let authors;
+        let newAuthors;
+        axios.post('http://localhost:8080/books', {
           id: id,
           title: title,
           authorId: authorId,
@@ -127,45 +129,42 @@ class bookStore {
           pages: pages,
           price: price
         })
-        .then((response) => {
-          var newBook = response.data;
-          var authors = response.data.authorId;
-          var newAuthors = response.data.authorId;
-          if(Array.isArray(authors)){
-            newAuthors = [];
-            authors.map((author) => {
-              axios.get('http://localhost:8080/authors/'+author)
-              .then((response) => {
-                newAuthors.push(response.data.name+" "+response.data.surname);
-              }, (err) => {
-                console.log(err);
-              });              
-            });
-            newBook.authorId = newAuthors;
-            setTimeout(() => {
-              this.books.push(newBook);
-            },200)
-          }
-          else {
-            newAuthors = "";
-            axios.get('http://localhost:8080/authors/'+authors)
-            .then((response) => {
-              newAuthors = response.data.name+" "+response.data.surname;
-            }, (err) => {
-              console.log(err);
-            });
-            newBook.authorId = newAuthors;
-            setTimeout(() => {
-              this.books.push(newBook);
-            },200)
-          }
-        },(error) => {
-          console.log(error);
-        });
+          .then((response) => {
+            newBook = response.data;
+            authors = response.data.authorId;
+            newAuthors = response.data.authorId;
+            if (Array.isArray(authors)) {
+              newAuthors = [];
+              authors.map((author) => {
+                axios.get('http://localhost:8080/authors/' + author)
+                  .then((response) => {
+                    newAuthors.push(response.data.name + " " + response.data.surname);
+                  }, (err) => {
+                    console.log(err);
+                  });
+              });
+            }
+            else {
+              newAuthors = "";
+              axios.get('http://localhost:8080/authors/' + authors)
+                .then((response) => {
+                  newAuthors = response.data.name + " " + response.data.surname;
+                }, (err) => {
+                  console.log(err);
+                });
+            }
+          }, (error) => {
+            console.log(error);
+          })
+        setTimeout(() => {
+          newBook.authorId = newAuthors;
+          console.log("new book :", newBook);
+          this.books.push(newBook);
+        }, 300)
       }),
 
-      editBook: action( (id, title, authorId, publication_year, publishing_house, pages, price) => {
-        axios.put('http://localhost:8080/books/'+id,{
+      editBook: action((id, title, authorId, publication_year, publishing_house, pages, price) => {
+        axios.put('http://localhost:8080/books/' + id, {
           title: title,
           authorId: authorId,
           publication_year: publication_year,
@@ -173,24 +172,23 @@ class bookStore {
           pages: pages,
           price: price
         })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       }),
-      
-      deleteBook: action((id) =>{
-        axios.delete('http://localhost:8080/books/'+id)
-        .then((response) => {
-          const currentBook = response.data;
-          const books = this.books;
-          books.slice(books.indexOf(currentBook),1);
-          this.books = books;
-        }), (err) => {
-          console.log(err);
-        }
+
+      deleteBook: action((id) => {
+        console.log("w mobx", id);
+        axios.delete('http://localhost:8080/books/' + id)
+          .then((response) => {
+            const currentBook = response.data;
+            this.books.slice(this.books.indexOf(currentBook), 1);
+          }), (err) => {
+            console.log(err);
+          }
       })
 
     });
