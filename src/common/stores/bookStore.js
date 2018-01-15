@@ -22,6 +22,10 @@ class bookStore {
         action: null
       },
       id: 8,
+      isBooksTable: true,
+      isAuthorsTable: false,
+      isSelectedBooks: true,
+      isSelectedAuthors: false,
 
       fetchBookList: action(() => {
         let currentBooks;
@@ -164,6 +168,7 @@ class bookStore {
       }),
 
       editBook: action((id, title, authorId, publication_year, publishing_house, pages, price) => {
+        let updatedBooks;
         axios.put('http://localhost:8080/books/' + id, {
           title: title,
           authorId: authorId,
@@ -172,12 +177,26 @@ class bookStore {
           pages: pages,
           price: price
         })
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
+          .then((response) => {
+            const currentBook = response.data;
+            console.log("trtrtbook",currentBook);
+            const currentBookId = response.data.id;
+            console.log("trtrtbook",currentBookId);
+            updatedBooks = this.books;
+            updatedBooks.map((book) => {
+              if(book.id === currentBookId){
+                book = {};
+                book = currentBook;
+                console.log(book);
+              }
+            })
+          }).catch((error) => {
             console.log(error);
           });
+          setTimeout(() => {
+            this.books = updatedBooks; 
+            console.log("ost",this.books);      
+          },300) 
       }),
 
       deleteBook: action((id) => {

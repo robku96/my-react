@@ -18,7 +18,8 @@ const BookPopup = inject("bookStore", "authorStore")(observer(
                 pages: '',
                 price: '',
                 authorsListForSelectComponent: [],
-                id: this.props.bookStore.id
+                id: this.props.bookStore.id,
+                idbook:'',
             }
             this.getAuthorsListForSelectComponent = this.getAuthorsListForSelectComponent.bind(this);
             this.handleChangeTitle = this.handleChangeTitle.bind(this);
@@ -45,6 +46,7 @@ const BookPopup = inject("bookStore", "authorStore")(observer(
 
                 if (book.id === id) {
                     this.setState({
+                        idbook: book.id,
                         title: book.title,
                         authors: newArray,
                         publicationYear: book.publicationYear,
@@ -129,7 +131,9 @@ const BookPopup = inject("bookStore", "authorStore")(observer(
                 this.props.bookStore.id++;
             }
             else if (action === "edit") {
-                this.props.bookStore.editBook(id, title, authors, publicationYear, publishingHouse, pages, price);
+                console.log("bookpopupstate",this.state);
+                console.log("bookstore",this.props.bookStore.book);
+                this.props.bookStore.editBook(this.state.idbook, title, authors, publicationYear, publishingHouse, pages, price);
                 const bookPopup = {
                     title: '',
                     id: null,

@@ -162,6 +162,7 @@ app.post('/books', function (req, res) {
 // PUT/id – edycja elementu kolekcji
 app.put('/books/:id', function (req, res) {
     var book = req.body;
+    console.log("requestbody",book);
     var currentBook = findBook(parseInt(req.params.id, 10));
     if (currentBook === null) {
         res.send(404);
@@ -173,7 +174,7 @@ app.put('/books/:id', function (req, res) {
         currentBook.publishing_house = book.publishing_house;
         currentBook.pages = book.pages;
         currentBook.price = book.price;
-        res.send(book);
+        res.send(currentBook);
     }
 });
 

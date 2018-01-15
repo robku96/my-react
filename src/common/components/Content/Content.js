@@ -4,9 +4,9 @@ import Table from '../Table/Table.js';
 import { observer, inject } from "mobx-react";
 import './Content.css';
 
-const Content = inject("bookStore","authorStore")(observer(
+const Content = inject("bookStore", "authorStore")(observer(
   class Content extends Component {
-    headers = [
+    headersBook = [
       'Id',
       'Title',
       'Authors',
@@ -16,17 +16,34 @@ const Content = inject("bookStore","authorStore")(observer(
       'Price',
       'Edit',
       'Delete'
+    ];
+
+    headersAuthors = [
+      'Id',
+      'Name',
+      'Surname',
+      'Date of birth',
+      'Adress',
+      'Phone',
+      'Books',
+      'Edit',
+      'Delete'
     ]
 
-    componentDidMount(){
+    componentDidMount() {
       this.props.bookStore.fetchBookList();
       this.props.authorStore.fetchAuthorList();
     }
 
     render() {
+      const { isBooksTable, isAuthorsTable } = this.props.bookStore;
       return (
         <div className="Content">
-          <Table headers={this.headers} data={this.props.bookStore.books} />
+          {isBooksTable ? (
+            <Table headers={this.headersBook} data={this.props.bookStore.books} />
+          ) : (
+              isAuthorsTable ? (<Table headers={this.headersAuthors} data={this.props.authorStore.authors} />) : (null)
+            )}
           <Footer />
         </div>
       );

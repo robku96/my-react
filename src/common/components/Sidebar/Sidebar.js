@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import SidebarItem from '../SidebarItem/SidebarItem.js';
+import SidebarItemBooks from '../SidebarItemBooks/SidebarItemBooks.js';
+import SidebarItemAuthors from '../SidebarItemAuthors/SidebarItemAuthors.js';
 import authors from '../../icons/authors.svg';
 import books from '../../icons/books.svg';
 import './Sidebar.css';
@@ -8,17 +9,15 @@ import './Sidebar.css';
 class Sidebar extends Component{
     constructor(props){
         super(props);
-        this.state = {
-        }
     }
     render(){
         return (
             <div className="Sidebar">
-                <SidebarItem source={books} />
-                <SidebarItem source={authors} />
+                <SidebarItemBooks source={books}  />
+                <SidebarItemAuthors source={authors} />
             </div>
         );
-    }
+    };
 }
 
 export default Sidebar;

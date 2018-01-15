@@ -1,0 +1,19 @@
+@import '../../../common/styles/variables.scss';
+
+.SidebarItem {
+    padding-top: $metric-base / 2;
+    padding-bottom: $metric-base / 2;    
+    color: $color-white;
+
+    .icon {
+        height: $metric-large / 2;
+    }
+
+    &:hover {
+        background-color: $color-darkblue;
+    }
+
+    &.selected {
+        background-color: $color-darkblue 
+    }
+}

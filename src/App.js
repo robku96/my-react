@@ -11,12 +11,14 @@ import './App.css';
 class App extends Component {
   render() {
     return (
+      <Provider bookStore={bookStore} authorStore={authorStore}>
       <div className="App">
-        <Sidebar />
-        <Provider bookStore={bookStore} authorStore={authorStore}>
+        
+          <Sidebar />
           <Content />
-        </Provider>     
+           
       </div>
+      </Provider>  
     );
   }
 }
